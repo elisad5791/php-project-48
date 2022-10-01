@@ -7,7 +7,13 @@
             "Hexlet\\Code\\": "src/"
         },
         "files": [
-            "src/Gendiff.php"
+            "src/Gendiff.php",
+            "src/Parsers.php",
+            "src/Formatters.php",
+            "src/InnerDiff.php",
+            "src/Formatters/JsonFormatter.php",
+            "src/Formatters/PlainFormatter.php",
+            "src/Formatters/StylishFormatter.php"
         ]
     },
     "authors": [
@@ -17,7 +23,8 @@
         }
     ],
     "require": {
-        "docopt/docopt": "^1.0"
+        "docopt/docopt": "^1.0",
+        "symfony/yaml": "^6.1"
     },
     "bin" :[
         "bin/gendiff"

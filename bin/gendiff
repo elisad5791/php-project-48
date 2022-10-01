@@ -9,7 +9,7 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use App\Gendiff;
+use function Differ\Gendiff\genDiff;
 
 $doc = <<<DOC
 Generate diff
@@ -30,6 +30,6 @@ $path1 = $args['<firstFile>'];
 $path2 = $args['<secondFile>'];
 $data1 = (array) json_decode(file_get_contents($path1));
 $data2 = (array) json_decode(file_get_contents($path2));
-$result = Gendiff\genDiff($data1, $data2);
+$result = genDiff($data1, $data2);
 file_put_contents('result.json', json_encode($result));
 print_r($result);
