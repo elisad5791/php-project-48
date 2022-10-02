@@ -8,27 +8,46 @@ use function Differ\Parsers\parse;
 
 class GendiffTest extends TestCase
 {
-  private $expected;
+  private $pathJson1;
+  private $pathJson2;
+  private $pathYml1;
+  private $pathYml2;
 
   public function setUp(): void
   {
-    $path = 'tests/fixtures/resultStylish.txt';
-    $this->expected = file_get_contents($path);
+    $this->pathJson1 = 'tests/fixtures/file1.json';
+    $this->pathJson2 = 'tests/fixtures/file2.json';
+    $this->pathYml1 = 'tests/fixtures/file1.yml';
+    $this->pathYml2 = 'tests/fixtures/file2.yml';
   }
-
+  
   public function testGendiffJson(): void
   {
-    $path1 = 'tests/fixtures/file1.json';
-    $path2 = 'tests/fixtures/file2.json';
-    $result = genDiff($path1, $path2);
-    $this->assertEquals($this->expected, $result);
+    $path = 'tests/fixtures/resultJson.txt';
+    $expected = file_get_contents($path);
+    $resultJson = genDiff($this->pathJson1, $this->pathJson2, 'json');
+    $resultYml = genDiff($this->pathYml1, $this->pathYml2, 'json');
+    $this->assertEquals($expected, $resultJson);
+    $this->assertEquals($expected, $resultYml);
   }
 
-  public function testGendiffYml(): void
+  public function testGendiffPlain(): void
   {
-    $path1 = 'tests/fixtures/file1.yml';
-    $path2 = 'tests/fixtures/file2.yml';
-    $result = genDiff($path1, $path2);
-    $this->assertEquals($this->expected, $result);
+    $path = 'tests/fixtures/resultPlain.txt';
+    $expected = file_get_contents($path);
+    $resultJson = genDiff($this->pathJson1, $this->pathJson2, 'plain');
+    $resultYml = genDiff($this->pathYml1, $this->pathYml2, 'plain');
+    $this->assertEquals($expected, $resultJson);
+    $this->assertEquals($expected, $resultYml);
+  }
+
+  public function testGendiffStylish(): void
+  {
+    $path = 'tests/fixtures/resultStylish.txt';
+    $expected = file_get_contents($path);
+    $resultJson = genDiff($this->pathJson1, $this->pathJson2);
+    $resultYml = genDiff($this->pathYml1, $this->pathYml2);
+    $this->assertEquals($expected, $resultJson);
+    $this->assertEquals($expected, $resultYml);
   }
 }

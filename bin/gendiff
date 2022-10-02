@@ -28,8 +28,6 @@ $args = Docopt::handle($doc, array('version'=>'Gendiff 1.0'));
 
 $path1 = $args['<firstFile>'];
 $path2 = $args['<secondFile>'];
-$data1 = (array) json_decode(file_get_contents($path1));
-$data2 = (array) json_decode(file_get_contents($path2));
-$result = genDiff($data1, $data2);
-file_put_contents('result.json', json_encode($result));
-print_r($result);
+$format = $args['--format'];
+$result = genDiff($path1, $path2, $format);
+print_r($result . "\n");
