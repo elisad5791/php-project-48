@@ -32,7 +32,6 @@ function genInnerDiff($data1, $data2)
             $values = ['diff' => genInnerDiff($value1, $value2)];
         }
 
-        /*return [...$acc, "$key" => ['status' => $status, 'values' => $values]];*/
         $acc["$key"] = ['status' => $status, 'values' => $values];
         return $acc;
     }, []);

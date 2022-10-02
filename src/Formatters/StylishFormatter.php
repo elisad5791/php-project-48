@@ -22,6 +22,12 @@ function prepare($value, $depth)
     if ($value === null) {
         return ' null';
     }
+    if ($value === 0) {
+        return ' 0';
+    }
+    if ($value === '') {
+        return ' ';
+    }
     if (!is_array($value)) {
         return empty($value) ? '' : " $value";
     }

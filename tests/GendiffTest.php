@@ -20,16 +20,6 @@ class GendiffTest extends TestCase
     $this->pathYml1 = 'tests/fixtures/file1.yml';
     $this->pathYml2 = 'tests/fixtures/file2.yml';
   }
-  
-  public function testGendiffJson(): void
-  {
-    $path = 'tests/fixtures/resultJson.txt';
-    $expected = file_get_contents($path);
-    $resultJson = genDiff($this->pathJson1, $this->pathJson2, 'json');
-    $resultYml = genDiff($this->pathYml1, $this->pathYml2, 'json');
-    $this->assertEquals($expected, $resultJson);
-    $this->assertEquals($expected, $resultYml);
-  }
 
   public function testGendiffPlain(): void
   {
