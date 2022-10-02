@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\PlainFormatter;
 
-function normalize($value)
+function normalize(mixed $value)
 {
     if (is_array($value)) {
         return '[complex value]';
@@ -22,7 +22,7 @@ function normalize($value)
     return $value;
 }
 
-function iter($diff, $path)
+function iter(array $diff, array $path)
 {
     $keys = array_keys($diff);
 
@@ -59,7 +59,7 @@ function iter($diff, $path)
     return implode("\n", $filteredResult);
 }
 
-function plainFormat($diff)
+function plainFormat(array $diff)
 {
     return iter($diff, []);
 }
