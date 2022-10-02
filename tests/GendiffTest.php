@@ -4,6 +4,7 @@ namespace App\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
+
 use function Differ\Differ\genDiff;
 use function Differ\Parsers\parse;
 
