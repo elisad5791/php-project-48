@@ -4,7 +4,7 @@ namespace Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-function parse($path)
+function parse(string $path)
 {
     $parsers = [
     'json' => fn($str) => json_decode($str, true),
