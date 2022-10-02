@@ -24,9 +24,9 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "symfony/yaml": "^6.1"
+        "symfony/yaml": "5.4.0"
     },
-    "bin" :[
+    "bin" : [
         "bin/gendiff"
     ],
     "require-dev": {
