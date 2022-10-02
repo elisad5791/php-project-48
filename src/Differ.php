@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Gendiff;
+namespace Differ\Differ;
 
 use function Differ\Parsers\parse;
 use function Differ\InnerDiff\genInnerDiff;
