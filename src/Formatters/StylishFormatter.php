@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\StylishFormatter;
 
-function getPad($depth)
+function getPad(int $depth)
 {
     $count = 4 * ($depth - 1);
     $padSmall = str_repeat(' ', $count);
@@ -10,7 +10,7 @@ function getPad($depth)
     return [$padSmall, $pad];
 }
 
-function prepare($value, $depth)
+function prepare(mixed $value, int $depth)
 {
     [$padSmall, $pad] = getPad($depth);
     if ($value === true) {
@@ -29,7 +29,7 @@ function prepare($value, $depth)
         return ' ';
     }
     if (!is_array($value)) {
-        return empty($value) ? '' : " $value";
+        return " $value";
     }
 
     $keys = array_keys($value);
@@ -41,13 +41,14 @@ function prepare($value, $depth)
     return " {\n$innerPart\n$padSmall}";
 }
 
-function iter($diff, $depth)
+function iter(array $diff, int $depth)
 {
     $keys = array_keys($diff);
     [$padSmall, $pad] = getPad($depth);
 
     $result = array_map(function ($key) use ($diff, $pad, $padSmall, $depth) {
-        extract($diff[$key]);
+        $status = $diff[$key]['status'];
+        $values = $diff[$key]['values'];
 
         if ($status === 'removed') {
             $val = prepare($values['value'], $depth + 1);
@@ -82,7 +83,7 @@ function iter($diff, $depth)
     return "{\n$innerPart\n$padSmall}";
 }
 
-function stylishFormat($diff)
+function stylishFormat(array $diff)
 {
     return iter($diff, 1);
 }
