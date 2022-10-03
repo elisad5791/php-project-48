@@ -33,7 +33,7 @@ function prepare(mixed $value, int $depth)
     }
 
     $keys = array_keys($value);
-    $result = array_map(function ($key) use ($value, $pad, $padSmall, $depth) {
+    $result = array_map(function ($key) use ($value, $pad, $depth) {
         $val = prepare($value[$key], $depth + 1);
         return "$pad  $key:$val";
     }, $keys);
@@ -46,26 +46,20 @@ function iter(array $diff, int $depth)
     $keys = array_keys($diff);
     [$padSmall, $pad] = getPad($depth);
 
-    $result = array_map(function ($key) use ($diff, $pad, $padSmall, $depth) {
+    $result = array_map(function ($key) use ($diff, $pad, $depth) {
         $status = $diff[$key]['status'];
         $values = $diff[$key]['values'];
 
         if ($status === 'removed') {
             $val = prepare($values['value'], $depth + 1);
             $str = "$pad- $key:$val";
-        }
-
-        if ($status === 'added') {
+        } elseif ($status === 'added') {
             $val = prepare($values['value'], $depth + 1);
             $str = "$pad+ $key:$val";
-        }
-
-        if ($status === 'unchanged') {
+        } elseif ($status === 'unchanged') {
             $val = prepare($values['value'], $depth + 1);
             $str = "$pad  $key:$val";
-        }
-
-        if ($status === 'updated') {
+        } else {
             if (array_key_exists('diff', $values)) {
                 $val = iter($values['diff'], $depth + 1);
                 $str = "$pad  $key: $val";
