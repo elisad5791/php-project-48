@@ -2,7 +2,7 @@
 
 namespace Differ\InnerDiff;
 
-function genInnerDiff($data1, $data2)
+function genInnerDiff(array $data1, array $data2)
 {
     $keys1 = array_keys($data1);
     $keys2 = array_keys($data2);
@@ -32,8 +32,7 @@ function genInnerDiff($data1, $data2)
             $values = ['diff' => genInnerDiff($value1, $value2)];
         }
 
-        $acc["$key"] = ['status' => $status, 'values' => $values];
-        return $acc;
+        return array_merge($acc, ["$key" => ['status' => $status, 'values' => $values]]);
     }, []);
     return $diff;
 }
