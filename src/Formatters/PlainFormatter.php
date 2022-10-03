@@ -27,22 +27,18 @@ function iter(array $diff, array $path)
     $keys = array_keys($diff);
 
     $result = array_map(function ($key) use ($diff, $path) {
-        extract($diff[$key]);
-        $str = '';
+        $status = $diff[$key]['status'];
+        $values = $diff[$key]['values'];
         $newPath = [...$path, $key];
         $fullKey = implode('.', $newPath);
 
         if ($status === 'removed') {
             $str = "Property '$fullKey' was removed";
-        }
-
-        if ($status === 'added') {
+        } elseif ($status === 'added') {
             $value = $values['value'];
             $val = normalize($value);
             $str = "Property '$fullKey' was added with value: $val";
-        }
-
-        if ($status === 'updated') {
+        } elseif ($status === 'updated') {
             if (array_key_exists('diff', $values)) {
                 $str = iter($values['diff'], $newPath);
             } else {
@@ -50,12 +46,14 @@ function iter(array $diff, array $path)
                 $newVal = normalize($values['newValue']);
                 $str = "Property '$fullKey' was updated. From $oldVal to $newVal";
             }
+        } else {
+            $str = '';
         }
 
         return $str;
     }, $keys);
 
-    $filteredResult = array_filter($result, fn($str) => !empty($str));
+    $filteredResult = array_filter($result, fn($str) => $str !== '');
     return implode("\n", $filteredResult);
 }
 
