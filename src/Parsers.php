@@ -12,8 +12,8 @@ function parse(string $path)
     'yaml' => fn($str) => Yaml::parse($str),
     ];
 
-    $path_info = pathinfo($path);
-    $ext = $path_info['extension'];
+    $arr = explode('.', $path);
+    $ext = end($arr);
     $content = file_get_contents($path);
     $data = $parsers[$ext]($content);
 
