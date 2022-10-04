@@ -32,4 +32,4 @@
 
 ### Демонстрация
 
-[видео](https://asciinema.org/a/472567)
+[видео](https://asciinema.org/a/525485)
