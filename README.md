@@ -3,7 +3,6 @@
 ### Статус тестов и линтера
 [![Actions Status](https://github.com/elisad5791/php-project-48/workflows/hexlet-check/badge.svg)](https://github.com/elisad5791/php-project-48/actions)
 [![Actions Status](https://github.com/elisad5791/php-project-48/actions/workflows/ci.yml/badge.svg)](https://github.com/elisad5791/php-project-48/actions//workflows/ci.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/3258193dff93596a9898/maintainability)](https://codeclimate.com/github/elisad5791/php-project-48/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3258193dff93596a9898/test_coverage)](https://codeclimate.com/github/elisad5791/php-project-48/test_coverage)
 
 ### Описание
@@ -17,7 +16,7 @@
 
 ### Системные требования
 
-- php
+- php 8.0
 - composer
 
 ### Установка
@@ -25,6 +24,10 @@
     git clone git@github.com:elisad5791/php-project-48.git
     cd php-project-48
     make install
+
+Добавьте в файл .bashrc строчку
+
+    export PATH="$PATH:$HOME/php-project-48/bin"
 
 ### Выполнение
 
