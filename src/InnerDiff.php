@@ -2,12 +2,14 @@
 
 namespace Differ\InnerDiff;
 
+use Illuminate\Support\Collection;
+
 function genInnerDiff(array $data1, array $data2)
 {
     $keys1 = array_keys($data1);
     $keys2 = array_keys($data2);
-    $keys = array_unique(array_merge($keys1, $keys2));
-    sort($keys);
+    $unsortedKeys = array_unique(array_merge($keys1, $keys2));
+    $keys = collect($unsortedKeys)->sort()->values()->all();
 
     $diff = array_reduce($keys, function ($acc, $key) use ($data1, $data2) {
         $condition1 = array_key_exists($key, $data1);

@@ -24,7 +24,8 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "symfony/yaml": "6.0.0"
+        "symfony/yaml": "6.0.0",
+        "illuminate/collections": "8.83.25"
     },
     "bin" : [
         "bin/gendiff"
